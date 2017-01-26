@@ -1,3 +1,4 @@
+require 'player'
 require 'playerX'
 
 describe PlayerX do

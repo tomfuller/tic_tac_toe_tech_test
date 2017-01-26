@@ -1,5 +1,5 @@
-#responsibility: to take a turn
-class PlayerX
+#responsibility: take X's turn
+class PlayerX < Player
 
   attr_reader :mark
 
