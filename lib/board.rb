@@ -3,8 +3,11 @@ class Board
 
   attr_reader :squares, :x_squares, :o_squares
 
-  def initialize
-    @squares = [[1,2,3],[4,5,6],[7,8,9]]
+  def initialize(square_klass)
+    @squares = {}
+    [*1..9].each do |n|
+      @squares[n] = square_klass
+    end
     @x_squares = []
     @o_squares = []
   end
@@ -15,16 +18,14 @@ class Board
   end
 
   def square_taken?(square)
-    return false if squares.flatten.include?(square)
+    return false if squares.keys.include?(square)
     true
   end
 
   private
 
   def remove_taken_square_from_sqaures(square)
-    squares.each do |squares|
-      squares.reject! { |s| s == square }
-    end
+    squares.delete(square)
   end
 
   def add_mark_to_square(mark, square)

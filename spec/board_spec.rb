@@ -2,12 +2,14 @@ require 'board'
 
 describe Board do
 
-  subject(:board){ described_class.new }
+  subject(:board){ described_class.new(square) }
+  let(:square){ double(:square) }
+  #before { allow(square).to receive(:new)}
 
   context 'initialize' do
 
     it 'should be initialized with a an array of squares' do
-      expect(board.squares).to eq([[1,2,3],[4,5,6],[7,8,9]])
+      expect(board.squares.keys).to eq([1,2,3,4,5,6,7,8,9])
     end
 
     it "should be initialized with an empty array for X's moves" do
@@ -25,13 +27,13 @@ describe Board do
     it 'should be able to take a mark X and a square and place mark in square' do
       board.mark_square('X', 5)
       expect(board.x_squares).to eq [5]
-      expect(board.squares).to eq([[1,2,3],[4,6],[7,8,9]])
+      expect(board.squares.keys).to eq([1,2,3,4,6,7,8,9])
     end
 
     it 'should be able to take a mark O and a square and place mark in square' do
       board.mark_square('O', 5)
       expect(board.o_squares).to eq [5]
-      expect(board.squares).to eq([[1,2,3],[4,6],[7,8,9]])
+      expect(board.squares.keys).to eq([1,2,3,4,6,7,8,9])
     end
 
   end
