@@ -12,24 +12,23 @@ class Board
 
   def mark_square(mark, square)
     add_mark_to_square(mark, square)
-    remove_taken_square_from_sqaures(square)
   end
 
   def square_taken?(square)
-    return false if squares.keys.include?(square)
-    true
+    this_square = find_square(square)
+    squares.values_at(this_square)[0].taken?
   end
 
   private
+
+  def find_square(square)
+    squares.keys.each {|s| return s if s == square}
+  end
 
   def populate_squares(square_klass)
     [*1..9].each do |n|
       @squares[n] = square_klass.new
     end
-  end
-
-  def remove_taken_square_from_sqaures(square)
-    squares.delete(square)
   end
 
   def add_mark_to_square(mark, square)

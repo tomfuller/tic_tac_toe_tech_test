@@ -10,6 +10,10 @@ class Square
     mark_square(mark)
   end
 
+  def taken?
+    @marking != ''
+  end
+
   private
 
   attr_writer :marking

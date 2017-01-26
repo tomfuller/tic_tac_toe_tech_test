@@ -11,4 +11,13 @@ describe Square do
     square.mark('X')
     expect(square.marking).to eq 'X'
   end
+
+  it 'should be able to tell if its not taken' do
+    expect(square.taken?).to eq false
+  end
+
+  it 'should be able to tell if its taken' do
+    square.mark('X')
+    expect(square.taken?).to eq true
+  end
 end
