@@ -1,3 +1,4 @@
+#responsibility: hold player moves
 class Square
 
   attr_reader :marking
