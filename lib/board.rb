@@ -1,3 +1,4 @@
+#responsibility: keep track of the board
 class Board
 
   attr_reader :squares
