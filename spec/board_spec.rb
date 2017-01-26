@@ -44,4 +44,18 @@ describe Board do
 
   end
 
+  context 'winners' do
+
+    it 'should be able to check if there is no winner' do
+      allow(square).to receive(:mark).and_return('O')
+      expect(board.winner?('X')).to eq false
+    end
+
+    it 'should be able to check if there is a winner' do
+      allow(square).to receive(:mark).and_return('X')
+      expect(board.winner?('X')).to eq true
+    end
+
+  end
+
 end

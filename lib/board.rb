@@ -17,7 +17,25 @@ class Board
     squares.values_at(this_square)[0].taken?
   end
 
+  def winner?(mark)
+    player_squares = get_players_squares(mark)
+    player_have_row?(player_squares)
+  end
+
   private
+
+  def player_have_row?(player_squares)
+    combo_array = player_squares.combination(3).to_a
+    combo_array.map! {|arr| (arr[1][0] - arr[0][0]) == (arr[2][0] - arr[1][0])}
+    return true if combo_array.include?(true)
+    false
+  end
+
+  def get_players_squares(mark)
+    player_squares = []
+    squares.each { |square| player_squares.push(square) if square[1].mark == mark }
+    player_squares
+  end
 
   def populate_squares(square_klass)
     [*1..9].each do |n|
