@@ -2,12 +2,11 @@ require 'game'
 
 describe Game do
 
-  subject(:game){ described_class.new(playerX, playerO, board) }
-  let(:playerX){ double(:playerX) }
-  let(:playerO){ double(:playerO) }
+  subject(:game){ described_class.new(player, board) }
+  let(:player){ double(:player) }
   let(:board){ double(:board) }
-  before { allow(playerX).to receive(:new).and_return(playerX)
-    allow(playerO).to receive(:new).and_return(playerO)
+  before {
+    allow(player).to receive(:new).and_return(player)
     allow(board).to receive(:new).and_return(board)
   }
 
@@ -18,11 +17,11 @@ describe Game do
     end
 
     it 'should be initialized with a player1' do
-      expect(game.playerX).to eq(playerX)
+      expect(game.playerX).to eq(player)
     end
 
     it 'should be initialized with a player2' do
-      expect(game.playerO).to eq(playerO)
+      expect(game.playerO).to eq(player)
     end
 
   end
@@ -44,12 +43,12 @@ describe Game do
   context 'current player' do
 
     it 'should know who the current player is' do
-      expect(game.current_player).to eq playerX
+      expect(game.current_player).to eq player
     end
 
     it 'should be able to switch current player' do
       game.swap_player
-      expect(game.current_player).to eq playerO
+      expect(game.current_player).to eq player
     end
 
   end
@@ -58,11 +57,13 @@ describe Game do
 
     it 'should know if current player doesnt win' do
       allow(board).to receive(:winner?).with("X").and_return(false)
+      allow(player).to receive(:mark).and_return('X')
       expect(game.player_wins?).to eq false
     end
 
     it 'should know if current player wins' do
       allow(board).to receive(:winner?).with("X").and_return(true)
+      allow(player).to receive(:mark).and_return('X')
       game.board.winner?("X")
       expect(game.player_wins?).to eq true
     end

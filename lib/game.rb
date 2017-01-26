@@ -3,10 +3,10 @@ class Game
 
   attr_reader :playerX, :playerO, :board, :players
 
-  def initialize(playerX, playerO, board)
-    @playerX = playerX.new
-    @playerO = playerO.new
+  def initialize(player_klass, board)
     @board = board.new
+    @playerX = player_klass.new('X', board)
+    @playerO = player_klass.new('O', board)
     @players = [playerX, playerO]
   end
 
@@ -19,7 +19,7 @@ class Game
   end
 
   def player_wins?
-    board.winner?('X')
+    board.winner?(current_player.mark)
   end
 
   def swap_player
