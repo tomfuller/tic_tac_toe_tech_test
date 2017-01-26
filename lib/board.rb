@@ -5,9 +5,7 @@ class Board
 
   def initialize(square_klass)
     @squares = {}
-    [*1..9].each do |n|
-      @squares[n] = square_klass
-    end
+    populate_squares(square_klass)
     @x_squares = []
     @o_squares = []
   end
@@ -24,6 +22,12 @@ class Board
 
   private
 
+  def populate_squares(square_klass)
+    [*1..9].each do |n|
+      @squares[n] = square_klass.new
+    end
+  end
+
   def remove_taken_square_from_sqaures(square)
     squares.delete(square)
   end
@@ -31,10 +35,6 @@ class Board
   def add_mark_to_square(mark, square)
     x_squares.push(square) if mark == 'X'
     o_squares.push(square) if mark == 'O'
-  end
-
-  def squares_include_square?(square)
-
   end
 
 end

@@ -4,7 +4,7 @@ describe Board do
 
   subject(:board){ described_class.new(square) }
   let(:square){ double(:square) }
-  #before { allow(square).to receive(:new)}
+  before { allow(square).to receive(:new).and_return(square)}
 
   context 'initialize' do
 
