@@ -3,11 +3,11 @@ class Game
 
   attr_reader :playerX, :playerO, :board, :players
 
-  def initialize(player_klass, board)
-    @board = board.new
+  def initialize(player_klass, board, square = Square)
+    @board = board.new(square)
     @playerX = player_klass.new('X', board)
     @playerO = player_klass.new('O', board)
-    @players = [playerX, playerO]
+    @players = [playerX, playerO] #swap back to ternary
   end
 
   def current_player
